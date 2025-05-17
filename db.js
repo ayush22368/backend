@@ -1,3 +1,5 @@
+console.log('<<<<< DB.JS VERSION CHECK - TIMESTAMP: ' + new Date().toISOString() + ' >>>>>'); // EXTREMELY UNIQUE LOG
+
 const { Pool } = require('pg');
 require('dotenv').config(); // Ensures process.env variables are loaded
 
@@ -19,18 +21,18 @@ const pool = new Pool({
 // EXPLICIT CONNECTION TEST (keeping for this test)
 pool.query('SELECT NOW()', (err, res) => {
     if (err) {
-        console.error('DATABASE CONNECTION FAILED (explicit test):', err);
+        console.error('DATABASE CONNECTION FAILED (explicit test with unique log present):', err);
     } else {
-        console.log('Database connected successfully (explicit test). Result:', res.rows[0]);
+        console.log('Database connected successfully (explicit test with unique log present). Result:', res.rows[0]);
     }
 });
 
 pool.on('connect', () => {
-    console.log('Successfully connected to the PostgreSQL database.');
+    console.log('Successfully connected to the PostgreSQL database (with unique log present).');
 });
 
 pool.on('error', (err) => {
-    console.error('Unexpected error on idle client', err);
+    console.error('Unexpected error on idle client (with unique log present)', err);
     // process.exit(-1); // Optionally exit if critical
 });
 
