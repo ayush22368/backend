@@ -9,19 +9,12 @@ if (!process.env.DATABASE_URL) {
 }
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL, // Reverted to use DATABASE_URL
-    // SSL configuration for production environments (optional, but recommended)
-    // ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+    connectionString: process.env.DATABASE_URL,
+    // SSL configuration for production environments (like Vercel)
+    ssl: {
+        rejectUnauthorized: false
+    }
 });
-
-// TEMPORARY TEST: Direct object configuration for the Pool - COMMENTED OUT
-// const pool = new Pool({
-//     user: 'trading_app_user',
-//     host: 'localhost',
-//     database: 'trading_app_db',
-//     password: 'p@ss123', // Using the literal password from your setup
-//     port: 5432,
-// });
 
 // EXPLICIT CONNECTION TEST (keeping for this test)
 pool.query('SELECT NOW()', (err, res) => {
@@ -44,4 +37,4 @@ pool.on('error', (err) => {
 module.exports = {
     query: (text, params) => pool.query(text, params),
     pool: pool // Export the pool itself if direct access is needed
-}; 
+};
