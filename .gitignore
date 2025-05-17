@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Environment variables (contains sensitive data)
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Build directories
+dist/
+build/
+
+# IDE specific files
+.idea/
+.vscode/
